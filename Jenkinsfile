@@ -1,28 +1,41 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_IMAGE = "rishabkm/stellartrack"
+    }
+
     stages {
-        stage('Checkout Code') {
+        stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/rishabkm/StellarTrack.git'
+                git 'https://github.com/rishabkm/StellarTrack.git'
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building the project...'
+                script {
+                    sh 'docker build -t $DOCKER_IMAGE .'
+                }
             }
         }
 
-        stage('Test') {
+        stage('Push to Docker Hub') {
             steps {
-                echo 'Running tests...'
+                script {
+                    sh 'docker login -u your-dockerhub-username -p your-dockerhub-password'
+                    sh 'docker tag $DOCKER_IMAGE your-dockerhub-username/stellartrack:latest'
+                    sh 'docker push your-dockerhub-username/stellartrack:latest'
+                }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy to Server') {
             steps {
-                echo 'Deploying the application...'
+                script {
+                    sh 'docker pull your-dockerhub-username/stellartrack:latest'
+                    sh 'docker run -d -p 80:80 your-dockerhub-username/stellartrack:latest'
+                }
             }
         }
     }
