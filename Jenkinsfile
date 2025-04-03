@@ -3,19 +3,20 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "rishabkm/stellartrack"
+        DOCKER_HUB_USERNAME = "your-dockerhub-username"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/rishabkm/StellarTrack.git'
+                git branch: 'main', url: 'https://github.com/rishabkm/StellarTrack.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
+                    sh "docker build -t $DOCKER_HUB_USERNAME/stellartrack:latest ."
                 }
             }
         }
@@ -23,9 +24,10 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    sh 'docker login -u your-dockerhub-username -p your-dockerhub-password'
-                    sh 'docker tag $DOCKER_IMAGE your-dockerhub-username/stellartrack:latest'
-                    sh 'docker push your-dockerhub-username/stellartrack:latest'
+                    withCredentials([string(credentialsId: 'docker-hub-password', variable: 'DOCKER_HUB_PASSWORD')]) {
+                        sh "echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin"
+                        sh "docker push $DOCKER_HUB_USERNAME/stellartrack:latest"
+                    }
                 }
             }
         }
@@ -33,8 +35,10 @@ pipeline {
         stage('Deploy to Server') {
             steps {
                 script {
-                    sh 'docker pull your-dockerhub-username/stellartrack:latest'
-                    sh 'docker run -d -p 80:80 your-dockerhub-username/stellartrack:latest'
+                    sh "docker pull $DOCKER_HUB_USERNAME/stellartrack:latest"
+                    sh "docker stop stellartrack || true"
+                    sh "docker rm stellartrack || true"
+                    sh "docker run -d --name stellartrack -p 80:80 $DOCKER_HUB_USERNAME/stellartrack:latest"
                 }
             }
         }
