@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_DIR = "C:/nginx/html/stellartrack"  // NGINX root directory
+        APP_DIR = "C:\\nginx\\html\\stellartrack" // Corrected Windows path
     }
 
     stages {
@@ -15,8 +15,10 @@ pipeline {
         stage('Deploy to NGINX') {
             steps {
                 script {
-                    sh "rm -rf ${APP_DIR}/*"
-                    sh "cp -r * ${APP_DIR}/"
+                    bat """
+                        del /s /q "${APP_DIR}\\*"
+                        xcopy /s /e . "${APP_DIR}\\"
+                    """
                 }
             }
         }
@@ -24,7 +26,21 @@ pipeline {
         stage('Restart NGINX') {
             steps {
                 script {
-                    sh "nginx -s reload"
+                    // Check if Nginx is running as a service or executable
+                    // If service, use net stop/start
+                    // If executable, use nginx.exe -s reload
+
+                    // Example for service:
+                    bat """
+                        net stop nginx
+                        net start nginx
+                    """
+
+                    // Example for executable (if Nginx is not in PATH):
+                    // bat "\"C:\\nginx\\nginx.exe\" -s reload"
+
+                    // If nginx is in the system's path, this will also work.
+                    // bat "nginx -s reload"
                 }
             }
         }
