@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "rishabkm/stellartrack"
-        DOCKER_HUB_USERNAME = "your-dockerhub-username"
+        APP_DIR = "C:/nginx/html/stellartrack"  // NGINX root directory
     }
 
     stages {
@@ -13,32 +12,19 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Deploy to NGINX') {
             steps {
                 script {
-                    sh "docker build -t $DOCKER_HUB_USERNAME/stellartrack:latest ."
+                    sh "rm -rf ${APP_DIR}/*"
+                    sh "cp -r * ${APP_DIR}/"
                 }
             }
         }
 
-        stage('Push to Docker Hub') {
+        stage('Restart NGINX') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'docker-hub-password', variable: 'DOCKER_HUB_PASSWORD')]) {
-                        sh "echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin"
-                        sh "docker push $DOCKER_HUB_USERNAME/stellartrack:latest"
-                    }
-                }
-            }
-        }
-
-        stage('Deploy to Server') {
-            steps {
-                script {
-                    sh "docker pull $DOCKER_HUB_USERNAME/stellartrack:latest"
-                    sh "docker stop stellartrack || true"
-                    sh "docker rm stellartrack || true"
-                    sh "docker run -d --name stellartrack -p 80:80 $DOCKER_HUB_USERNAME/stellartrack:latest"
+                    sh "nginx -s reload"
                 }
             }
         }
