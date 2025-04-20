@@ -9,21 +9,21 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 script {
-                    sh 'terraform init'  // Initialize Terraform
+                    bat 'terraform init'  // Initialize Terraform (Windows compatible)
                 }
             }
         }
         stage('Terraform Apply') {
             steps {
                 script {
-                    sh 'terraform apply -auto-approve'  // Apply the Terraform configuration
+                    bat 'terraform apply -auto-approve'  // Apply Terraform config (Windows compatible)
                 }
             }
         }
         stage('Deploy to NGINX') {
             steps {
                 script {
-                    bat 'xcopy /s /e . "C:\\nginx\\html\\stellartrack\\"'
+                    bat 'xcopy /s /e /y . "C:\\nginx\\html\\stellartrack\\"'
                     bat 'taskkill /F /IM nginx.exe'
                     bat 'start "" "C:\\nginx\\nginx.exe"'
                 }
