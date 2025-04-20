@@ -1,8 +1,14 @@
-provider "aws" {
-  region = "us-west-2"
+# main.tf
+
+provider "local" {
+  # No config needed
 }
 
-resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0" # Your EC2 instance AMI
-  instance_type = "t2.micro"
+resource "null_resource" "deploy_static_site" {
+  provisioner "local-exec" {
+    command = <<EOT
+      if exist "C:\\nginx\\html\\stellartrack" rmdir /S /Q "C:\\nginx\\html\\stellartrack"
+      xcopy /E /I /Y "${path.module}/site" "C:\\nginx\\html\\stellartrack"
+    EOT
+  }
 }
