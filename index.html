@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -291,3 +292,298 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StellarTrack</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            color: #00d1b2;
+            text-align: center;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: black;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            margin-left: 20px;
+            font-weight: bold;
+            color: #00d1b2;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .logo img {
+            height: 40px;
+            margin-right: 10px; /* Add some space between the icon and text */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Hover effect: Glowing Navbar */
+        nav ul li a:hover {
+            text-shadow: 0 0 10px #00d1b2, 0 0 20px #00d1b2;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('https://source.unsplash.com/1600x900/?stars,space');
+            height: 100vh;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            background-color: #00d1b2;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Hover effect: Glowing Button */
+        .hero button:hover {
+            background-color: #00b39c;
+            box-shadow: 0 0 10px #00d1b2, 0 0 20px #00d1b2;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 50px;
+            background-color: #000;
+            text-align: center;
+        }
+
+        /* Responsive card layout using Flexbox */
+        .feature-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px; /* Adding some space between cards */
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1 1 calc(33.333% - 40px); /* 3 cards per row on large screens */
+            max-width: 300px; /* Limit the max width */
+            box-sizing: border-box;
+            margin: 10px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            margin-bottom: 20px;
+        }
+
+        .feature-card button {
+            padding: 10px 20px;
+            background-color: #00d1b2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Hover effect: Glowing Explore Button */
+        .feature-card button:hover {
+            background-color: #00b39c;
+            box-shadow: 0 0 10px #00d1b2, 0 0 20px #00d1b2;
+        }
+
+        /* Glowing effect for cards when scrolled into view */
+        .feature-card.glow {
+            box-shadow: 0 0 20px #00d1b2, 0 0 30px #00d1b2;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5); /* Decreased opacity for subtle effect */
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .feature-card {
+                flex: 1 1 calc(50% - 20px); /* 2 cards per row on medium screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .feature-card {
+                flex: 1 1 100%; /* 1 card per row on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>This the test to know whether the jenkins pipline is working or not.</h1>
+        <h2>Khusra mishra</h2>
+        <h3>hello rambo</h3>
+        
+    </div>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">
+        <img src="https://img.freepik.com/premium-vector/st-letter-logo-design-black-background-initial-monogram-letter-st-logo-design-vector-template_634196-1208.jpg"> <!-- Replace with actual logo -->
+        <h5>StellarTrack</h5>
+    </div>
+    <ul>
+        <li><a href="#home-section">Home</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToExplore('events')">Track Events</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToExplore('star-map')">Explore Star Map</a></li>
+        <li><a href="javascript:void(0)" onclick="scrollToExplore('learn')">Learn More</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="home-section" class="hero">
+    <h1>Explore the Wonders of the Universe by Rambo Rakshas.</h1>
+    <p>Your one-stop destination for tracking astronomical events and observing star patterns.</p>
+    <button onclick="scrollToExplore()">MISHRA</button>
+</section>
+
+<!-- Explore Section -->
+<div id="explore-section" class="features-section">
+    <h2>What You Can Do with StellarTrack</h2>
+    <div class="feature-cards">
+        <!-- Track Astronomical Events -->
+        <div id="events" class="feature-card">
+            <h3>Track Astronomical Events</h3>
+            <p>Get real-time information on astronomical events happening in your region and around the world.</p>
+            <button onclick="window.open('https://en.wikipedia.org/wiki/List_of_future_astronomical_events')">See Events</button>
+        </div>
+
+        <!-- Explore the Star Map -->
+        <div id="star-map" class="feature-card">
+            <h3>Explore the Star Map</h3>
+            <p>Interactive star map allowing you to explore the sky above.</p>
+            <button onclick="window.open('https://stellarium-web.org', '_blank')">Explore Star Map</button>
+        </div>
+
+        <!-- Learn and Explore -->
+        <div id="learn" class="feature-card">
+            <h3>Learn and Explore</h3>
+            <p>Access educational resources and articles to expand your knowledge about astronomy.</p>
+            <button onclick="window.open('https://en.wikipedia.org/wiki/Astronomy', '_blank')">Learn More</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Scroll to Explore section and trigger glow effect
+    function scrollToExplore(card = '') {
+        document.getElementById("explore-section").scrollIntoView({behavior: 'smooth'});
+
+        // Remove glow from all cards
+        let cards = document.querySelectorAll('.feature-card');
+        cards.forEach(card => card.classList.remove('glow'));
+
+        // Glow the specific card if provided
+        if (card) {
+            document.getElementById(card).classList.add('glow');
+            setTimeout(() => {
+                document.getElementById(card).classList.remove('glow');
+            }, 2000); // Glow duration
+        }
+    }
+
+    // Generate sparkles
+    function createSparkles() {
+        for (let i = 0; i < 100; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            document.body.appendChild(sparkle);
+
+            sparkle.style.width = `${Math.random() * 5 + 1}px`;
+            sparkle.style.height = sparkle.style.width;
+            sparkle.style.top = `${Math.random() * window.innerHeight}px`;
+            sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+            sparkle.style.animationDelay = `${Math.random() * 2}s`;
+        }
+    }
+
+    createSparkles();
+</script>
+
+</body>
+</html>
+>>>>>>> 829892dc2cb97bdc2baab9bab4e88b4e1a76e347
