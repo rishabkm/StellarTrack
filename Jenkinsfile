@@ -1,25 +1,29 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/rishabkm/StellarTrack.git', branch: 'main'
+                checkout scm
             }
         }
-
-        stage('Deploy to NGINX') {
+        stage('Terraform Init') {
             steps {
                 script {
-                    bat 'del /s /q "C:\\nginx\\html\\stellartrack\\*"'
-                    bat 'xcopy /s /e . "C:\\nginx\\html\\stellartrack\\"'
+                    sh 'terraform init'  // Initialize Terraform
                 }
             }
         }
-
-        stage('Restart NGINX') {
+        stage('Terraform Apply') {
             steps {
                 script {
+                    sh 'terraform apply -auto-approve'  // Apply the Terraform configuration
+                }
+            }
+        }
+        stage('Deploy to NGINX') {
+            steps {
+                script {
+                    bat 'xcopy /s /e . "C:\\nginx\\html\\stellartrack\\"'
                     bat 'taskkill /F /IM nginx.exe'
                     bat 'start "" "C:\\nginx\\nginx.exe"'
                 }
