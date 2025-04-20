@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #Testing Jenkins Integration 
 #by Rishabh Mishra
 
@@ -31,7 +30,7 @@
    ```
 3. Open `index.html` in your browser or use a local server.
 
-=======
+
 #Testing Jenkins Integration 
 #by Rishabh Mishra
 
@@ -64,4 +63,4 @@
    ```
 3. Open `index.html` in your browser or use a local server.
 
->>>>>>> 829892dc2cb97bdc2baab9bab4e88b4e1a76e347
+
