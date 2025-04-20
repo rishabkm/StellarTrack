@@ -1,17 +1,8 @@
 provider "aws" {
-  region = "us-east-1"  # Region where the website will be hosted
+  region = "us-west-2"
 }
 
-resource "aws_s3_bucket" "website" {
-  bucket = "my-website-bucket"  # Name of the storage space
-  website {
-    index_document = "index.html"  # The main page file of your website
-  }
-}
-
-resource "aws_s3_bucket_object" "website_content" {
-  bucket = aws_s3_bucket.website.bucket
-  key    = "index.html"  # Name of your file
-  source = "index.html"  # Path to the file on your computer (or GitHub repo)
-  acl    = "public-read"  # Makes the website visible to everyone
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0" # Your EC2 instance AMI
+  instance_type = "t2.micro"
 }
