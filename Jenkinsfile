@@ -26,6 +26,11 @@ pipeline {
             post {
                 failure {
                     bat 'powershell -File terraform\\rollback.ps1'
+                    script {
+                        // Trigger rollback in Jenkins if deployment fails
+                        def buildUrl = "http://localhost:8080/job/automation/${BUILD_NUMBER}/rebuild"
+                        sh "curl -X POST ${buildUrl}"
+                    }
                 }
             }
         }
