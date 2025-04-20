@@ -1,12 +1,6 @@
 $DEPLOY_DIR = "C:\nginx\html\stellartrack"
-$TEMP_CLONE = "$env:USERPROFILE\StellarTrack_Temp"
 $BACKUP_DIR = "C:\nginx\html\stellartrack_backup"
-
-# Cleanup previous temp
-Remove-Item $TEMP_CLONE -Recurse -Force -ErrorAction SilentlyContinue
-
-# Clone fresh copy
-git clone https://github.com/rishabkm/StellarTrack.git $TEMP_CLONE
+$WORKSPACE_DIR = "C:\ProgramData\Jenkins\.jenkins\workspace\automation"
 
 # Create backup
 if (Test-Path $DEPLOY_DIR) {
@@ -17,7 +11,7 @@ if (Test-Path $DEPLOY_DIR) {
 # Deploy new version
 Remove-Item $DEPLOY_DIR -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Path $DEPLOY_DIR | Out-Null
-Copy-Item "$TEMP_CLONE\site\*" $DEPLOY_DIR -Recurse -Force
+Copy-Item "$WORKSPACE_DIR\site\*" $DEPLOY_DIR -Recurse -Force
 
 # Verify deployment
 $indexContent = Get-Content "$DEPLOY_DIR\index.html" -Raw
