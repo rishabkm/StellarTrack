@@ -3,7 +3,6 @@
 
 
 
-# StellarTrack is the best site just wow. just what is this 
 
 ## 🚀 About StellarTrack
 **StellarTrack** is a web-based platform designed for astronomy enthusiasts, space lovers, and curious minds to explore and stay updated with celestial events. The website provides real-time information on space-related events using various APIs.
