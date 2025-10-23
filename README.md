@@ -1,5 +1,5 @@
 tanker is the best one
-
+why do i have to be alone all the time in this world.
 
 
 this is the best way to do work
